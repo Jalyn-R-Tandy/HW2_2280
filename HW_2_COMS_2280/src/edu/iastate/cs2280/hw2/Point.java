@@ -2,25 +2,23 @@
 
 /**
  *  
- * @author
+ * @author Jalyn Tandy
  *
  */
 
-public class Point implements Comparable<Point>
-{
+public class Point implements Comparable<Point> {
 	private int x; 
 	private int y;
 	
 	public static boolean xORy;  // compare x coordinates if xORy == true and y coordinates otherwise 
 	                             // To set its value, use Point.xORy = true or false. 
 	
-	public Point()  // default constructor
-	{
-		// x and y get default value 0
+	public Point() { // default constructor
+		this.x = 0;
+		this.y = 0;
 	}
 	
-	public Point(int x, int y)
-	{
+	public Point(int x, int y) {
 		this.x = x;  
 		this.y = y;   
 	}
@@ -30,13 +28,11 @@ public class Point implements Comparable<Point>
 		y = p.getY();
 	}
 
-	public int getX()   
-	{
+	public int getX() {
 		return x;
 	}
 	
-	public int getY()
-	{
+	public int getY() {
 		return y;
 	}
 	
@@ -44,17 +40,14 @@ public class Point implements Comparable<Point>
 	 * Set the value of the static instance variable xORy. 
 	 * @param xORy
 	 */
-	public static void setXorY(boolean xORy)
-	{
-		// TODO 
+	public static void setXorY(boolean xORy) {
+		Point.xORy = xORy;
 	}
 	
 	
 	@Override
-	public boolean equals(Object obj)
-	{
-		if (obj == null || obj.getClass() != this.getClass())
-		{
+	public boolean equals(Object obj) {
+		if (obj == null || obj.getClass() != this.getClass()) {
 			return false;
 		}
     
@@ -70,8 +63,7 @@ public class Point implements Comparable<Point>
 	 * 		    0   if this.x == q.x && this.y == q.y)  
 	 * 			1	otherwise 
 	 */
-	public int compareTo(Point q)
-	{
+	public int compareTo(Point q) {
 		return 0; 
 		// TODO; 
 	}
@@ -81,8 +73,7 @@ public class Point implements Comparable<Point>
 	 * Output a point in the standard form (x, y). 
 	 */
 	@Override
-    public String toString() 
-	{
+    public String toString() {
 		// TODO 
 		return null; 
 	}
