@@ -8,7 +8,7 @@ import java.util.InputMismatchException;
 
 /**
  *  
- * @author
+ * @author Jalyn Tandy
  *
  */
 
@@ -18,8 +18,7 @@ import java.util.InputMismatchException;
  *
  */
 
-public class SelectionSorter extends AbstractSorter
-{
+public class SelectionSorter extends AbstractSorter {
 	// Other private instance variables if you need ... 
 	
 	/**
@@ -28,9 +27,9 @@ public class SelectionSorter extends AbstractSorter
 	 *  
 	 * @param pts  
 	 */
-	public SelectionSorter(Point[] pts)  
-	{
-		// TODO 
+	public SelectionSorter(Point[] pts) {
+		super(pts);
+		algorithm = "selection sort";
 	}	
 
 	
@@ -39,8 +38,18 @@ public class SelectionSorter extends AbstractSorter
 	 * 
 	 */
 	@Override 
-	public void sort()
-	{
-		// TODO 
+	public void sort() {
+		int n = points.length;
+		for (int i = 0; i < n - 1; i++) {
+			int minIndex = i;
+			
+			for (int j = i + 1; j < n; j++) {
+				if (points[j].compareTo(points[minIndex]) < 0) {
+					minIndex = j;
+				}
+			}
+			
+			swap(i, minIndex);
+		}
 	}	
 }

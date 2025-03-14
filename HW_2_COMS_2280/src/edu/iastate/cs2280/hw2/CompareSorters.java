@@ -19,8 +19,7 @@ import java.util.Scanner;
 import java.util.Random; 
 
 
-public class CompareSorters 
-{
+public class CompareSorters {
 	/**
 	 * Repeatedly take integer sequences either randomly generated or read from files. 
 	 * Use them as coordinates to construct points.  Scan these points with respect to their 
@@ -28,8 +27,23 @@ public class CompareSorters
 	 * 
 	 * @param args
 	 **/
-	public static void main(String[] args) throws FileNotFoundException
-	{		
+	public static void main(String[] args) throws FileNotFoundException {	
+		
+		System.out.println("Performances of Four Sorting Algorithms in Point Scanning");
+		System.out.println();
+		System.out.println("keys: 1 (random integers) 2 (file input) 3 (exit)");
+		
+		Scanner scnr = new Scanner(System.in);
+		int trial = 1;
+		
+		while (trial != -1) {
+			System.out.println("Trial " + trial + ": ");
+			int userChoice = scnr.nextInt();
+			
+			if (userChoice == 3) {
+				trial = -1;
+			}
+		}
 		// TODO 
 		// 
 		// Conducts multiple rounds of comparison of four sorting algorithms.  Within each round, 
@@ -63,7 +77,7 @@ public class CompareSorters
 	/**
 	 * This method generates a given number of random points.
 	 * The coordinates of these points are pseudo-random numbers within the range 
-	 * [-50,50] × [-50,50]. Please refer to Section 3 on how such points can be generated.
+	 * [-50,50] ï¿½ [-50,50]. Please refer to Section 3 on how such points can be generated.
 	 * 
 	 * Ought to be private. Made public for testing. 
 	 * 
@@ -71,10 +85,17 @@ public class CompareSorters
 	 * @param rand      Random object to allow seeding of the random number generator
 	 * @throws IllegalArgumentException if numPts < 1
 	 */
-	public static Point[] generateRandomPoints(int numPts, Random rand) throws IllegalArgumentException
-	{ 
-		return null; 
-		// TODO 
+	public static Point[] generateRandomPoints(int numPts, Random rand) throws IllegalArgumentException { 
+		if (numPts < 1) {
+			throw new IllegalArgumentException("Error");
+		}
+		
+		Point[] newPoints = new Point[numPts];
+		for (int i = 0; i < numPts; i++) {
+			int x = rand.nextInt();
+			int y = rand.nextInt();
+			newPoints[i] = new Point(x, y);
+		}
+		return newPoints; 
 	}
-	
 }

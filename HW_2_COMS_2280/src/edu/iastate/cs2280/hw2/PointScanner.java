@@ -2,7 +2,7 @@ package edu.iastate.cs2280.hw2;
 
 /**
  * 
- * @author 
+ * @author Jalyn Tandy
  *
  */
 
@@ -18,8 +18,7 @@ import java.util.InputMismatchException;
  * It records the employed sorting algorithm as well as the sorting time for comparison. 
  *
  */
-public class PointScanner  
-{
+public class PointScanner {
 	private Point[] points; 
 	
 	private Point medianCoordinatePoint;  // point whose x and y coordinates are respectively the medians of 
@@ -36,8 +35,13 @@ public class PointScanner
 	 * @param  pts  input array of points 
 	 * @throws IllegalArgumentException if pts == null or pts.length == 0.
 	 */
-	public PointScanner(Point[] pts, Algorithm algo) throws IllegalArgumentException
-	{
+	public PointScanner(Point[] pts, Algorithm algo) throws IllegalArgumentException {
+		if (pts == null || pts.length == 0) {
+			throw new IllegalArgumentException();
+		}
+		
+		points = pts;
+		sortingAlgorithm = algo;
 		
 	}
 
@@ -49,8 +53,7 @@ public class PointScanner
 	 * @throws FileNotFoundException 
 	 * @throws InputMismatchException   if the input file contains an odd number of integers
 	 */
-	protected PointScanner(String inputFileName, Algorithm algo) throws FileNotFoundException, InputMismatchException
-	{
+	protected PointScanner(String inputFileName, Algorithm algo) throws FileNotFoundException, InputMismatchException {
 		// TODO
 	}
 
@@ -67,24 +70,43 @@ public class PointScanner
 	 * @param algo
 	 * @return
 	 */
-	public void scan()
-	{
-		// TODO  
-		AbstractSorter aSorter; 
+	public void scan() {
+		AbstractSorter aSorter = null; 
 		
-		// create an object to be referenced by aSorter according to sortingAlgorithm. for each of the two 
-		// rounds of sorting, have aSorter do the following: 
-		// 
-		//     a) call setComparator() with an argument 0 or 1. 
-		//
-		//     b) call sort(). 		
-		// 
-		//     c) use a new Point object to store the coordinates of the medianCoordinatePoint
-		//
-		//     d) set the medianCoordinatePoint reference to the object with the correct coordinates.
-		//
-		//     e) sum up the times spent on the two sorting rounds and set the instance variable scanTime. 
+		if (sortingAlgorithm == Algorithm.MergeSort) {
+			aSorter = new MergeSorter(points);
+		}
+		if (sortingAlgorithm == Algorithm.InsertionSort) {
+			aSorter = new InsertionSorter(points);
+		}
+		if (sortingAlgorithm == Algorithm.QuickSort) {
+			aSorter = new QuickSorter(points);
+		}
+		if (sortingAlgorithm == Algorithm.SelectionSort) {
+			aSorter = new SelectionSorter(points);
+		}
 		
+		long startTime;
+		long endTime;
+		
+		// x-coordinate
+		aSorter.setComparator(0);
+		startTime = System.currentTimeMillis();
+		aSorter.sort();
+		endTime = System.currentTimeMillis();
+		long xTime = endTime - startTime;
+		int x = aSorter.getMedian().getX();
+		
+		// y-coordinate
+		aSorter.setComparator(1);
+		startTime = System.currentTimeMillis();
+		aSorter.sort();
+		endTime = System.currentTimeMillis();
+		long yTime = endTime - startTime;
+		int y = aSorter.getMedian().getY();
+		
+		scanTime = xTime + yTime;
+		medianCoordinatePoint = new Point(x, y);		
 	}
 	
 	
@@ -99,10 +121,20 @@ public class PointScanner
 	 * 
 	 * Use the spacing in the sample run in Section 2 of the project description. 
 	 */
-	public String stats()
-	{
+	public String stats() {
+		if (sortingAlgorithm == Algorithm.MergeSort) {
+			return "MergeSort " + points.length + " " + scanTime;
+		}
+		if (sortingAlgorithm == Algorithm.InsertionSort) {
+			return "InsertionSort " + points.length + " " + scanTime;
+		}
+		if (sortingAlgorithm == Algorithm.QuickSort) {
+			return "QuickSort " + points.length + " " + scanTime;
+		}
+		if (sortingAlgorithm == Algorithm.SelectionSort) {
+			return "SelectionSort " + points.length + " " + scanTime;
+		}
 		return null; 
-		// TODO 
 	}
 	
 	
@@ -111,12 +143,9 @@ public class PointScanner
 	 * in between. 
 	 */
 	@Override
-	public String toString()
-	{
-		return null; 
-		// TODO
+	public String toString() {
+		return medianCoordinatePoint.toString();
 	}
-
 	
 	/**
 	 *  
@@ -126,12 +155,7 @@ public class PointScanner
 	 * 
 	 * @throws FileNotFoundException
 	 */
-	public void writeMCPToFile() throws FileNotFoundException
-	{
+	public void writeMCPToFile() throws FileNotFoundException {
 		// TODO 
 	}	
-
-	
-
-		
 }

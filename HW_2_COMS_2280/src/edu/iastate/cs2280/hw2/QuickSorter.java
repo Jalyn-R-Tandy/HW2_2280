@@ -8,7 +8,7 @@ import java.util.InputMismatchException;
 
 /**
  *  
- * @author
+ * @author Jalyn Tandy
  *
  */
 
@@ -18,8 +18,7 @@ import java.util.InputMismatchException;
  *
  */
 
-public class QuickSorter extends AbstractSorter
-{
+public class QuickSorter extends AbstractSorter {
 	
 	// Other private instance variables if you need ... 
 		
@@ -29,9 +28,9 @@ public class QuickSorter extends AbstractSorter
 	 *   
 	 * @param pts   input array of integers
 	 */
-	public QuickSorter(Point[] pts)
-	{
-		// TODO 
+	public QuickSorter(Point[] pts) {
+		super(pts);
+		algorithm = "quicksort";
 	}
 		
 
@@ -40,8 +39,7 @@ public class QuickSorter extends AbstractSorter
 	 * 
 	 */
 	@Override 
-	public void sort()
-	{
+	public void sort() {
 		// TODO 
 	}
 	
@@ -52,8 +50,7 @@ public class QuickSorter extends AbstractSorter
 	 * @param first  starting index of the subarray
 	 * @param last   ending index of the subarray
 	 */
-	private void quickSortRec(int first, int last)
-	{
+	private void quickSortRec(int first, int last) {
 		// TODO
 	}
 	
@@ -65,8 +62,7 @@ public class QuickSorter extends AbstractSorter
 	 * @param last
 	 * @return
 	 */
-	private int partition(int first, int last)
-	{
+	private int partition(int first, int last) {
 		// TODO 
 		return 0; 
 	}	

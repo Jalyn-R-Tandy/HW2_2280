@@ -7,7 +7,7 @@ import java.util.InputMismatchException;
 
 /**
  *  
- * @author
+ * @author Jalyn Tandy
  *
  */
 
@@ -17,8 +17,7 @@ import java.util.InputMismatchException;
  *
  */
 
-public class MergeSorter extends AbstractSorter
-{
+public class MergeSorter extends AbstractSorter {
 	// Other private instance variables if needed
 	
 	/** 
@@ -27,9 +26,9 @@ public class MergeSorter extends AbstractSorter
 	 *  
 	 * @param pts   input array of integers
 	 */
-	public MergeSorter(Point[] pts) 
-	{
-		// TODO  
+	public MergeSorter(Point[] pts) {
+		super(pts);
+		algorithm = "mergesort";
 	}
 
 
@@ -38,9 +37,8 @@ public class MergeSorter extends AbstractSorter
 	 * 
 	 */
 	@Override 
-	public void sort()
-	{
-		// TODO 
+	public void sort() {
+		mergeSortRec(points);
 	}
 
 	
@@ -51,9 +49,8 @@ public class MergeSorter extends AbstractSorter
 	 * 
 	 * @param pts	point array 
 	 */
-	private void mergeSortRec(Point[] pts)
-	{
-		
+	private void mergeSortRec(Point[] pts) {
+		// TODO
 	}
 
 	
