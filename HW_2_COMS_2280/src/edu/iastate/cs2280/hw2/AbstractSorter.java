@@ -43,12 +43,13 @@ public abstract class AbstractSorter {
 	 * @throws IllegalArgumentException if pts == null or pts.length == 0.
 	 */
 	protected AbstractSorter(Point[] pts) throws IllegalArgumentException {
-		// TODO
 		if (pts == null || pts.length == 0) {
 			throw new IllegalArgumentException();
+		} else {
+			points = new Point[pts.length];
+			getPoints(pts);			
 		}
 		
-		getPoints(pts);
 	}
 
 	/**
@@ -65,7 +66,27 @@ public abstract class AbstractSorter {
 	 *        
 	 */
 	public void setComparator(int order) throws IllegalArgumentException {
-		// TODO 
+		if (order < 0 || order > 1) {
+			throw new IllegalArgumentException("Order needs to be 0 or 1");
+		} else {
+			if (order == 0) {
+				Point.setXorY(true);
+				pointComparator = new Comparator<Point>() {
+					@Override
+					public int compare(Point p1, Point p2) {
+						return p1.compareTo(p2);
+					}
+				};
+			} else if (order == 1) {
+				Point.setXorY(false); // set to Y
+				pointComparator = new Comparator<Point>() {
+					@Override
+					public int compare(Point p1, Point p2) {
+						return p1.compareTo(p2);
+					}
+				};
+			}
+		}
 	}
 
 	/**

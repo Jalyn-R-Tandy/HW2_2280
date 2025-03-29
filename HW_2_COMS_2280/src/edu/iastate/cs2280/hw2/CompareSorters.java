@@ -28,6 +28,7 @@ public class CompareSorters {
 	 * @param args
 	 **/
 	public static void main(String[] args) throws FileNotFoundException {	
+		PointScanner[] scannerArr = new PointScanner[4];
 		
 		System.out.println("Performances of Four Sorting Algorithms in Point Scanning");
 		System.out.println();
@@ -40,9 +41,41 @@ public class CompareSorters {
 			System.out.println("Trial " + trial + ": ");
 			int userChoice = scnr.nextInt();
 			
-			if (userChoice == 3) {
-				trial = -1;
+			switch (userChoice) {
+				case 1:
+					System.out.println("Enter number of random points: ");
+					int randPts = scnr.nextInt();
+					Point[] pts = generateRandomPoints(randPts, new Random());
+					scannerArr[0] = new PointScanner(pts, Algorithm.SelectionSort); 
+					scannerArr[1] = new PointScanner(pts, Algorithm.InsertionSort);
+					scannerArr[2] = new PointScanner(pts, Algorithm.MergeSort);
+					scannerArr[3] = new PointScanner(pts, Algorithm.QuickSort);
+					trial++;
+					break;
+				case 2:
+					System.out.println("Points from a file");
+					System.out.println("File name: ");
+					String fileName = scnr.next();
+					scannerArr[0] = new PointScanner(fileName, Algorithm.SelectionSort); 
+					scannerArr[1] = new PointScanner(fileName, Algorithm.InsertionSort);
+					scannerArr[2] = new PointScanner(fileName, Algorithm.MergeSort);
+					scannerArr[3] = new PointScanner(fileName, Algorithm.QuickSort);
+					trial++;
+					break;
+				case 3:
+					trial = -1;
+					break;
 			}
+			
+			System.out.println();
+			System.out.println("algorithm   size  time (ns)");
+			System.out.println("----------------------------------");
+			for (PointScanner s : scannerArr) {
+				s.scan();
+				System.out.println(s.stats());
+			}
+			System.out.println("----------------------------------");
+			System.out.println();
 		}
 		// TODO 
 		// 

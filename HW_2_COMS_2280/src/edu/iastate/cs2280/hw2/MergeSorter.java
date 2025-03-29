@@ -2,7 +2,8 @@ package edu.iastate.cs2280.hw2;
 
 import java.io.FileNotFoundException;
 import java.lang.NumberFormatException; 
-import java.lang.IllegalArgumentException; 
+import java.lang.IllegalArgumentException;
+import java.util.Arrays;
 import java.util.InputMismatchException;
 
 /**
@@ -50,7 +51,43 @@ public class MergeSorter extends AbstractSorter {
 	 * @param pts	point array 
 	 */
 	private void mergeSortRec(Point[] pts) {
-		// TODO
+		    if (pts.length <= 1)
+		        return;
+		        
+		    int mid = pts.length / 2;
+		    
+		    Point[] left = Arrays.copyOfRange(pts, 0, mid);
+		    Point[] right = Arrays.copyOfRange(pts, mid, pts.length);
+		    
+		    mergeSortRec(left);
+		    mergeSortRec(right);
+		    
+		    int a = 0;
+		    int b = 0;
+		    int c = 0;
+		    
+		    while (a < left.length && b < right.length) {
+		        if (left[a].compareTo(right[b]) < 0) {
+		            pts[c] = left[a];
+		            a++;
+		        } else {
+		            pts[c] = right[b];
+		            b++;
+		        }
+		        c++;
+		    }
+		    
+		    while (b < right.length) {
+		        pts[c] = right[b];
+		        b++;
+		        c++;
+		    }
+		    
+		    while (a < left.length) {
+		        pts[c] = left[a];
+		        a++;
+		        c++;
+		    }
 	}
 
 	

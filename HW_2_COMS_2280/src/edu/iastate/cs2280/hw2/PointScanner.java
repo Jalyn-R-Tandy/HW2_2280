@@ -6,8 +6,11 @@ package edu.iastate.cs2280.hw2;
  *
  */
 
+import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
 import java.util.InputMismatchException;
+import java.util.Scanner;
 
 
 /**
@@ -27,6 +30,8 @@ public class PointScanner {
 	
 		
 	protected long scanTime; 	       // execution time in nanoseconds. 
+	
+	private String fileName;
 	
 	/**
 	 * This constructor accepts an array of points and one of the four sorting algorithms as input. Copy 
@@ -54,7 +59,33 @@ public class PointScanner {
 	 * @throws InputMismatchException   if the input file contains an odd number of integers
 	 */
 	protected PointScanner(String inputFileName, Algorithm algo) throws FileNotFoundException, InputMismatchException {
-		// TODO
+		int newInt = 0; // initialize
+		sortingAlgorithm = algo; // sorting algorithm
+		fileName = inputFileName; // input file name
+
+		try (Scanner scnr = new Scanner(new File(inputFileName))) {
+			while (scnr.hasNext()) {
+				scnr.nextInt(); // read an integer from the file
+				newInt++; // increment the count
+			}
+			if (newInt % 2 != 0) {
+				throw new InputMismatchException(); // exception if the count is odd
+			}
+			points = new Point[newInt / 2]; // create new array of points
+			scnr.close(); // close scanner
+		}
+
+		try (Scanner anotherNewScanner = new Scanner(new File(inputFileName))) {
+			int anotherNewInt = 0;
+			while (anotherNewScanner.hasNext()) {
+				int x = anotherNewScanner.nextInt();
+				int y = anotherNewScanner.nextInt();
+				points[anotherNewInt] = new Point(x, y);
+				anotherNewInt++;
+			}
+		} catch (FileNotFoundException e) {
+			throw new FileNotFoundException();
+		}
 	}
 
 	
@@ -156,6 +187,12 @@ public class PointScanner {
 	 * @throws FileNotFoundException
 	 */
 	public void writeMCPToFile() throws FileNotFoundException {
-		// TODO 
-	}	
+		try {
+			FileWriter file = new FileWriter(fileName); 
+			file.write(toString()); 
+			file.close();
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		}
+	}
 }
